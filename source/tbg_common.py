@@ -1,16 +1,3 @@
-"""
-TBG - shared pieces used by the launcher, the simulation window and the drawing window.
-
-  * app constants, asset lookup, Windows app-id / window icon helpers
-  * the Scene model (lines and splines with thickness, source lines, linear / rotary
-    actuators, which geometry each actuator moves)
-  * conversion of a Scene (at the current actuator positions) into the plain wall segments
-    the simulation solver understands
-  * .tbg file reading / writing
-
-No matplotlib here, so the drawing window stays light.
-"""
-
 import json
 import math
 import os
