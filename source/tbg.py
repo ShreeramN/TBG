@@ -1,19 +1,3 @@
-"""
-TBG - launcher
-==============
-Run this file:   python tbg.py
-
-  tbg.py         this launcher (splash screen, then starts the simulation window)
-  tbg_sim.py     the solver and the simulation window (menus, sliders, display)
-  tbg_draw.py    the drawing window  (File > Draw...)
-  tbg_common.py  shared scene model, file format, thickness / actuator geometry, assets
-  tbg_eddy.py    schematic eddy / wake overlay  (View > Eddies)
-  tbg_pmap.py    the maps (View > Map): streamline preview and solver pictures
-  tbg_cfd.py     the 2-D Euler / Navier-Stokes flow solver behind the maps
-
-Requires:  pip install numpy matplotlib
-"""
-
 import os
 import sys
 import time
