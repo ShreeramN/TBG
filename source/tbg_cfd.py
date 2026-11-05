@@ -1,36 +1,5 @@
-"""
-TBG - 2-D Euler / Navier-Stokes solver (used by the maps, tbg_pmap.py)
-=====================================================================
-A compact finite-volume solver for steady, perfect-gas flow on a Cartesian grid. Inviscid
-(Euler) by default; with viscosity on (Edit > Setup) it adds laminar viscous stresses, heat
-conduction and no-slip walls, so separation bubbles, shear layers and eddies appear.
-Unlike the wave-tracing model it has no blind spots: it solves detached bow shocks, subsonic
-pockets, inlets and ducts, shock reflections / interactions, expansion fans and wakes in one go.
-
-  * MUSCL reconstruction (van Leer limiter, primitive variables) + SSP-RK2 time stepping
-  * HLLC flux, switched to HLL at shocks (carbuncle cure); first-order start-up, then second order
-  * local time stepping (we only want the steady state)
-  * walls by ghost cells: every solid cell next to the fluid gets the mirror image of the flow
-    at the wall (reflected velocity), so slanted walls are smooth instead of staircased.
-    Closed bodies are exact; free-standing thin lines get a thickness of two cells
-  * boundaries with the main flow on: freestream inflow on the right, extrapolation top /
-    bottom, and on the left extrapolation if the flow leaves supersonically, ambient pressure if
-    it leaves subsonically (so ducts and inlets can exhaust)
-  * main flow off (quiescent ambient, e.g. a rocket nozzle firing into still air): every outer
-    boundary is a pressure boundary - supersonic outflow is extrapolated, subsonic outflow sees
-    the ambient pressure, and inflow (entrainment) brings in ambient gas
-  * source lines: a solid strip whose cells on the outflow side hold the source state (Mach,
-    total pressure / ambient, total temperature / ambient), so they inject flow normal to the line
-  * viscosity: mu = mu_ref (T/T_inf)^0.76, Prandtl 0.72, Stokes hypothesis; mu_ref from the
-    Reynolds number per unit length. No-slip, adiabatic walls
-
-Units: rho_inf = 1, a_inf = 1 (p_inf = 1/gamma), flow along -x at Mach M.
-Needs only numpy.
-"""
-
 import math
 import time
-
 import numpy as np
 
 NG = 2                       # padding layers around the grid
