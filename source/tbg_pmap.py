@@ -1,35 +1,3 @@
-"""
-TBG - pressure map
-==================
-Turns the solved flow into a pressure image (p / p_freestream), one value per pixel.
-
-How: a dense bundle of streamlines is marched through the solved wave pattern with
-Flow.streamlines(..., with_p=True) (pressure is updated at every shock and fan crossing).
-Each streamline segment is painted onto a pixel grid, small gaps between neighbouring
-streamlines (e.g. behind expansions) are filled from their neighbours, and walls act as
-barriers so pressure never leaks through a surface.
-
-Not coloured (hatched): regions no streamline reaches (wakes / separated flow, shadowed
-pockets) and subsonic regions, where the solver stops tracking waves. Beyond the dotted tail
-of a shock (where an expansion fan has cut it off) the solver has no shock, so the map shows
-the undisturbed pressure there.
-
-Used by tbg_sim.py (View > Map). Needs only numpy and matplotlib.
-
-Maps (View > Map):  Pressure  p/p_inf     Mach       local Mach number (sonic line dashed)
-                    Density   rho/rho_inf Schlieren  numerical schlieren exp(-k |grad rho|)
-                    Vorticity dv/dx - du/dy (eddies; needs viscosity in Setup to be physical)
-Only the pressure map has the instant streamline preview; the others come from the solver.
-
-Two back-ends:
-  compute()    the streamline-marching map described above. Instant, used as the quick preview
-               while a slider is being dragged.
-  CfdJob       the real thing: a 2-D Euler solver (tbg_cfd.py) run in a background thread once
-               things settle. It solves the WHOLE field, including detached bow shocks, subsonic
-               regions, ducts / inlets, reflections and wakes, so nothing is left hatched, and
-               the map is smooth. The picture refreshes while it converges.
-"""
-
 import math
 import threading
 import time
