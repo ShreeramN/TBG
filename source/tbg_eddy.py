@@ -1,31 +1,3 @@
-"""
-TBG - eddies / wake overlay  (View > Eddies in the simulation window)
-=====================================================================
-Eddies are a VISCOUS effect: they come from boundary-layer separation and the roll-up of
-free shear layers, not from the flow being supersonic. The wave-tracing solver (and the Euler
-pressure map) are inviscid, so they cannot produce them. This module draws a SCHEMATIC wake
-on top of the solved picture, the same way the bow-shock standoff is an empirical estimate:
-
-  * base wakes      leeward faces of closed bodies that are steeper than SEP_DEG separate.
-                    Shear layers leave the separation corners and converge at the wake neck,
-                    enclosing a recirculation bubble with a pair of counter-rotating eddies.
-                    A recompression shock stands at the neck (M > 1), and a decaying vortex
-                    street follows downstream.
-  * ground steps    a base sitting on the ground (plane on) is a backward-facing step:
-                    one shear layer reattaches on the ground, with a main eddy and a small
-                    counter-rotating corner eddy, then a row of boundary-layer eddies.
-  * trailing edges  free downstream ends of thin lines shed a thin vortex street.
-
-Recirculation length:  free wake  L ~ h (1 + 1/M^2),   ground step  L ~ h (2.5 + 3.5/M^2)
-(h = base height). Nothing here feeds back into the solver: streamlines, shocks and the
-pressure map are unchanged.
-
-Only drawn with the main flow on. For eddies that are actually computed, switch Viscosity on in
-Edit > Setup and use View > Map > Vorticity Map.
-
-Used by tbg_sim.py. Needs only numpy and matplotlib.
-"""
-
 import math
 import time
 
