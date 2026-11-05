@@ -1,31 +1,3 @@
-"""
-TBG - drawing window  (File > Draw... in the simulation window)
-
-  Tools (drop-down)   Normal line | Spline | Source line | Linear actuator | Rotary actuator
-  Thickness           thickness of the lines you draw (0 = ideal thin wall; > 0 = a solid plate)
-
-  Drawing a line      click to place the start point, then EITHER click the end point
-                      OR type a length, press Tab, type an angle, press Enter.
-                      The angle is measured counter-clockwise from the +x axis (an arc shows it).
-                      The chain continues from the end point. Esc / right-click ends the chain.
-  Magnet              line ends snap to existing vertices, then to existing lines.
-  Linear actuator     draw its track like a line (click or Length/Tab/Angle).
-  Rotary actuator     click to place its centre (snaps to vertices).
-  Spline              click the points the curve passes through; Enter / right-click / Esc
-                      finishes, clicking the first point closes it. Right-click > Edit points:
-                      drag points, click the curve to insert one, right-click a point to delete it.
-  Source line         drawn like a line; flow leaves it on the arrow side. Right-click >
-                      Set flow... (Mach, p0/p_amb, T0/T_amb), Flip direction.
-  Image...            overlay picture for retracing (load, move, scale by two points, opacity).
-  Pairing             right-click an actuator > Pair geometry..., then drag a box:
-                      left -> right = geometry fully inside the box,
-                      right -> left = anything the box touches.
-  View                mouse wheel zooms, middle-button drag pans, Fit resets.
-  Finish              sends the sketch to the simulation window.
-
-Pure tkinter + numpy (no matplotlib); Pillow (installed with matplotlib) for the overlay image.
-"""
-
 import math
 import tkinter as tk
 from tkinter import messagebox, simpledialog, ttk
