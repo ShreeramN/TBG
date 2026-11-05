@@ -1,18 +1,3 @@
-"""
-TBG - simulation window  (solver + shock display)
-
-The wave-tracing solver below is exactly the one from the single-file version; only the
-way geometry gets in has changed:
-
-  * geometry and actuators are drawn in the separate Draw window (tbg_draw.py,
-    File > Draw...) and arrive here as a Scene (tbg_common.py)
-  * every actuator gets a slider under the plot (linear: along its track, rotary: degrees)
-  * View > Map shows solver pictures (tbg_pmap.py / tbg_cfd.py); source lines and the main-flow
-    switch (Edit > Setup) are handled by the solver
-
-Requires:  pip install numpy matplotlib        Run:  python tbg.py
-"""
-
 import math
 import random
 import sys
